@@ -1,5 +1,7 @@
 <script setup>
+import { ref } from 'vue';
 
+import listaCompra from './components/icons/listaCompra.vue';
 
 </script>
 
@@ -15,6 +17,8 @@
   <button>Agregar</button>
 
 </form>
+
+<listaCompra />
 
 </template>
 
