@@ -14,7 +14,8 @@ import listaCompra from './components/icons/listaCompra.vue';
   <p>Valor unitario</p>
   <input>
   <br>
-  <button>Agregar</button>
+  <br>
+  <button @click="agregarComp">Agregar</button>
 
 </form>
 
@@ -24,4 +25,8 @@ import listaCompra from './components/icons/listaCompra.vue';
 
 <style>
 
+form {
+  background-color:rgb(12, 10, 32);
+  
+}
 </style>
