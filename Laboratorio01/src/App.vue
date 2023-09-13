@@ -4,7 +4,18 @@
 </script>
 
 <template>
-<h1>se conectogit add</h1>
+<form>
+  <p>Articulo</p>
+  <input>
+  <p>Cantidad</p>
+  <input>
+  <p>Valor unitario</p>
+  <input>
+  <br>
+  <button>Agregar</button>
+
+</form>
+
 </template>
 
 <style>
