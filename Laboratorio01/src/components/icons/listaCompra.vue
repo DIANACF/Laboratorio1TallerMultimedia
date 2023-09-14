@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 
-let id = 0;
+let TablaId = 1;
 
 const newCompra = ref('');
-const Compra = ref([{}]);
+const Compra = ref([{id: TablaId++,
+     Articulo: 'A1',
+      Cantidad: 0, 
+      Vunitario: 0,
+      Total: number}]);
 
 function agregarComp () {
     Compra.value.push ()
@@ -16,7 +20,7 @@ function agregarComp () {
 
 <template>
     <br>
-    <table>
+    <table id="TablaCompras">
         <thead>
             <tr>
             <th>#</th>
