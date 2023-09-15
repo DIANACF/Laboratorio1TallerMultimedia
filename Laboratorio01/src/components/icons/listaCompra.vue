@@ -10,7 +10,7 @@ const Compra = ref([{id: TablaId++,
       Vunitario: 0,
       Total: number}]);
 
-function agregarComp () {
+function agregarCompra () {
     Compra.value.push ()
     newCompra.value = ''
 }
