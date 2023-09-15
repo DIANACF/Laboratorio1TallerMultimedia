@@ -18,12 +18,13 @@ const agregarCompra = () => {
       valorunit: valorunit.value,
       valorTotal,
     });
-  }
-} 
-
-NomArticulo.value = '';
+    NomArticulo.value = '';
     Cantidad.value = 0;
     valorunit.value = 0;
+  }
+}; 
+
+
 
 
 const eliminarCompra = (index) => {
@@ -96,9 +97,9 @@ const totalAPagar = computed(() => {
         <tbody>
             <tr v-for="(producto, index) in compras" :key="index">
             <td>{{ index + 1 }}</td>
-            <td>{{ producto.articulo }}</td>
-            <td>{{ producto.cantidad }}</td>
-            <td>{{ producto.vunitario }}</td>
+            <td>{{ producto.NomArticulo }}</td>
+            <td>{{ producto.Cantidad }}</td>
+            <td>{{ producto.valorunit }}</td>
             <td>{{ producto.total }}</td>
             <td><button @click="eliminarCompra">Eliminar</button></td>
 
