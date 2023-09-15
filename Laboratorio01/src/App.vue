@@ -56,7 +56,7 @@ const descuento = computed(() => {
   return Math.max(descuentoCantidad, descuentoPrecio);
 });
 
-// Cálculo del total a pagar con descuento aplicado usando computed
+
 const totalAPagar = computed(() => {
   return totalCompra.value - descuento.value;
 });
@@ -65,7 +65,7 @@ const totalAPagar = computed(() => {
 
 <template>
   <!--formulario para agregar productos-->
-<form @submit.prevent="agregarCompra">
+<form @submit.prevent="agregarCompra" class="ubicar">
   <label for="NomArticulo">Articulo: </label>
   <br>
   <input v-model="NomArticulo" type="text" id="NomArticulo">
@@ -83,7 +83,7 @@ const totalAPagar = computed(() => {
 
 </form>
 <br>
-    <table id="TablaCompras">
+    <table class="ubicar">
         <thead>
             <tr>
             <th>#</th>
@@ -100,7 +100,7 @@ const totalAPagar = computed(() => {
             <td>{{ producto.NomArticulo }}</td>
             <td>{{ producto.Cantidad }}</td>
             <td>{{ producto.valorunit }}</td>
-            <td>{{ producto.total }}</td>
+            <td>{{ producto.valorTotal }}</td>
             <td><button @click="eliminarCompra">Eliminar</button></td>
 
         </tr>
@@ -117,5 +117,18 @@ const totalAPagar = computed(() => {
 form {
   background-color:rgb(12, 10, 32);
   
+  
 }
+
+table, th, td {
+  border: 1px solid;
+}
+
+/*.ubicar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}*/
+
+
 </style>
