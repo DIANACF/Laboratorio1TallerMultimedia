@@ -1,14 +1,64 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+
+const NomArticulo = ref(''); 
+const Cantidad = ref(0);      
+const valorunit = ref(0);     
+const compras = ref([]);  
+const newCompra = ref('');    
+
+const agregarCompra = () => {
+  
+  if (NomArticulo.value && Cantidad.value > 0 && valorunit.value > 0) {
+    const valorTotal = Cantidad.value * valorunit.value;
+   
+    compras.value.push({
+      NomArticulo: NomArticulo.value,
+      Cantidad: Cantidad.value,
+      valorunit: valorunit.value,
+      valorTotal,
+    });
+  }
+} 
+
+NomArticulo.value = '';
+    Cantidad.value = 0;
+    valorunit.value = 0;
 
 
+const eliminarCompra = (index) => {
+  compras.value.splice(index, 1);
+};
 
- //newCompra: [];
-//const Compra = ref([{
-  //NomArticulo: '',
-  //Cantidad: 0,
-  //valorunit: 0,
-//}]);
+const totalCompra = computed(() => {
+  return compras.value.reduce((total, compra) => total + compra.valorTotal, 0);
+});
+
+
+const descuento = computed(() => {
+  let descuentoCantidad = 0;
+  let descuentoPrecio = 0;
+
+  if (totalCompra.value >= 120000) {
+    descuentoPrecio = totalCompra.value * 0.1;
+  } else if (totalCompra.value >= 60000) {
+    descuentoPrecio = totalCompra.value * 0.05;
+  }
+
+  if (compras.value.length >= 12) {
+    descuentoCantidad = totalCompra.value * 0.2;
+  } else if (compras.value.length >= 6) {
+    descuentoCantidad = totalCompra.value * 0.1;
+  }
+
+  // Selecciona el mayor descuento entre descuentoCantidad y descuentoPrecio
+  return Math.max(descuentoCantidad, descuentoPrecio);
+});
+
+// Cálculo del total a pagar con descuento aplicado usando computed
+const totalAPagar = computed(() => {
+  return totalCompra.value - descuento.value;
+});
 
 </script>
 
@@ -28,7 +78,7 @@ import { ref } from 'vue';
   <input v-model.number="valorunit" type="number" id="valorunit">
   <br>
   <br>
-  <button @click="agregarComp">Agregar</button>
+  <button @click="agregarCompra">Agregar</button>
 
 </form>
 <br>
@@ -44,24 +94,21 @@ import { ref } from 'vue';
         </tr>
         </thead>
         <tbody>
-            <tr>
-            <td> </td>
-            <td>A1</td>
-            <td>2</td>
-            <td>1000</td>
-            <td>2000</td>
-            <td><button>Eliminar</button></td>
+            <tr v-for="(producto, index) in compras" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ producto.articulo }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>{{ producto.vunitario }}</td>
+            <td>{{ producto.total }}</td>
+            <td><button @click="eliminarCompra">Eliminar</button></td>
 
         </tr>
         </tbody>
     </table>
     <br>
-    <p>Total Compra: </p>
-    <input>
-    <p>Descuento: </p>
-    <input>
-    <p>Total a pagar: </p>
-    <input>
+    <p>Total Compra: {{ totalCompra }}</p>
+    <p>Descuento: {{ descuento }}</p>
+    <p>Total a pagar: {{ totalAPagar }} </p>
 </template>
 
 <style>
